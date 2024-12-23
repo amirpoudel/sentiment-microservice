@@ -1,6 +1,7 @@
 ./storage/*
 ingestion-servcie/node_modules
 ingestion-service/logs
+ingestion-service/storage/uploads
 
 # Logs
 logs
