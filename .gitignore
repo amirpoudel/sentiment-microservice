@@ -3,6 +3,9 @@ ingestion-servcie/node_modules
 ingestion-service/logs
 ingestion-service/storage/uploads
 
+
+test/node_modules
+
 # Logs
 logs
 *.log
