@@ -5,6 +5,8 @@ ingestion-service/storage/uploads
 
 
 test/node_modules
+admin-service/node_modules
+result-service/node_modules
 
 # Logs
 logs

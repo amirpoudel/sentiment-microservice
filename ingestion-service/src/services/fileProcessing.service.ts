@@ -2,6 +2,7 @@ import { IFileProcessingService } from "../interface/fileProcessing.interface";
 import { trycatchWrapper } from "../lib/async/trycatch.async"
 import fs from 'fs'
 import csvParser from "csv-parser";
+import { produceMessage } from "../infrastructure/external-service/kafka/producer.kafka";
 
 
 
@@ -15,9 +16,10 @@ export default class FileProcessingService implements IFileProcessingService{
     processCSVFile = trycatchWrapper(async(filePath:string)=>{
         // process csv file using stream and push all data to kafka
         const stream = fs.createReadStream(filePath).pipe(csvParser())
-        stream.on("data",(row)=>{
+        stream.on("data",async (row)=>{
             console.log("Row : ",row)
             // push each row to kafka
+            await produceMessage('reviews' ,JSON.stringify(row))
             
         })
 
