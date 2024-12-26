@@ -1,0 +1,9 @@
+fastapi[standard]
+uvicorn[standard]
+
+torch
+transformers
+
+
+confluent-kafka
+
