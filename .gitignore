@@ -8,8 +8,10 @@ test/node_modules
 admin-service/node_modules
 result-service/node_modules
 
+
 model-service/__pycache__
 model-service/env
+model-service/model.safetensors
 
 # Logs
 logs
