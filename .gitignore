@@ -11,7 +11,7 @@ result-service/node_modules
 
 model-service/__pycache__
 model-service/env
-model-service/model.safetensors
+model-service/sentiment_model_uncased/odel.safetensors
 
 # Logs
 logs
