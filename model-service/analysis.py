@@ -15,9 +15,13 @@ def sentimentAnalysis(text):
     sentiment_label, scores = result
     sentiment_labels = ["Negative", "Neutral", "Positive"]
 
-
-    print(result)
     return result  
+
+
+
+
+
+
 
   
 

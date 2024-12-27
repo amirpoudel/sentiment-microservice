@@ -6,9 +6,6 @@ export const kafka = new Kafka({
 })
 
 
-
-
-
 export async function consumeMessage(){
 
     const consumer = kafka.consumer(

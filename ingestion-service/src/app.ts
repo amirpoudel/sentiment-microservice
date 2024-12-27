@@ -1,8 +1,15 @@
+
+
+
+
+
+
+
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-
+import morgan from 'morgan'
 
 const app = express();
 
@@ -31,6 +38,10 @@ app.use(bodyParser.json());
 app.use(express.json({limit: "16kb"}));
 app.use(express.urlencoded({extended: true, limit: "16kb"}));
 app.use(cookieParser());
+
+// morgan
+
+morgan('tiny')
 
 // Serve static files
 app.use('/api/v1/storage',express.static('./storage'));
