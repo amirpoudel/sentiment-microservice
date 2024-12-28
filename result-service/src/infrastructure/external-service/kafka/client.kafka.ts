@@ -17,7 +17,7 @@ export async function consumeMessage(){
     await consumer.connect();
 
     await consumer.subscribe({
-        topics:['new-reviews'] , fromBeginning:true
+        topics:['reviews-result'] , fromBeginning:true
     })
 
     await consumer.run({

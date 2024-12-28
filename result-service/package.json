@@ -1,17 +1,54 @@
 {
-  "dependencies": {
-    "body-parser": "^1.20.3",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "kafkajs": "^2.2.4",
-    "winston": "^3.17.0"
+
+  "scripts": {
+
+    "generate": "drizzle-kit generate --out ./src/infrastructure/data-access/db/migrations --schema ./src/infrastructure/data-access/db/schema.ts --dialect postgresql",
+
+    "migrate": "node -r ts-node/register --env-file=.env ./src/infrastructure/data-access/db/migrate.ts  ",
+
+    "db:seed": "ts-node ./src/infrastructure/data-access/db/seed.ts"
+
   },
+
+  "dependencies": {
+
+    "@neondatabase/serverless": "^0.10.4",
+
+    "body-parser": "^1.20.3",
+
+    "cookie-parser": "^1.4.7",
+
+    "cors": "^2.8.5",
+
+    "dotenv": "^16.4.7",
+
+    "drizzle-orm": "^0.38.3",
+
+    "express": "^4.21.2",
+
+    "kafkajs": "^2.2.4",
+
+    "pg": "^8.13.1",
+
+    "ts-node": "^10.9.2",
+
+    "winston": "^3.17.0"
+
+  },
+
   "devDependencies": {
+
     "@types/cookie-parser": "^1.4.8",
+
     "@types/cors": "^2.8.17",
+
     "@types/express": "^5.0.0",
-    "@types/node": "^22.10.2"
+
+    "@types/node": "^22.10.2",
+
+    "drizzle-kit": "^0.30.1"
+
   }
+
 }
+
