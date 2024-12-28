@@ -4,6 +4,7 @@ import  {serial , text , timestamp , integer , pgTable} from "drizzle-orm/pg-cor
 
 
 
+
 export const reviews = pgTable("reviews",{
     id : serial("id").primaryKey(),
     bulkProcessId : uuid("bulk_process_id").notNull(),

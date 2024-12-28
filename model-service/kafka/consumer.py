@@ -9,7 +9,7 @@ import json
 
 # Kafka Consumer Configuration
 conf = {
-    'bootstrap.servers': '192.168.1.65:9092',
+    'bootstrap.servers': '192.168.1.66:9092',
     'group.id': 'result-service',
     'auto.offset.reset': 'earliest'
 }
@@ -18,7 +18,7 @@ conf = {
 #due to some error define producer here
 # Define Kafka producer configuration
 producerConf = {
-    'bootstrap.servers': '192.168.1.65:9092',  # Kafka broker address
+    'bootstrap.servers': '192.168.1.66:9092',  # Kafka broker address
     'client.id': 'reviews'
 }
 

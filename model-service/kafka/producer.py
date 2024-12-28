@@ -2,7 +2,7 @@ from confluent_kafka import Producer # type: ignore
 
 # Define Kafka producer configuration
 conf = {
-    'bootstrap.servers': '192.168.1.65:9092',  # Kafka broker address
+    'bootstrap.servers': '192.168.1.66:9092',  # Kafka broker address
     'client.id': 'reviews'
 }
 
