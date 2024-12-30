@@ -50,7 +50,7 @@ export class ReviewRepository implements IReviewRepository{
      
         const cacheKey = generateCacheKey('reviews',query);
         console.log('Cache key:',cacheKey);
-        const cache = this.cache.getCache(cacheKey);
+        const cache = await this.cache.getCache(cacheKey);
         if(cache){
             console.log('Cache hit');
             return cache;
