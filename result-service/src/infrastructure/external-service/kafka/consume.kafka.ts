@@ -2,8 +2,10 @@ import { Kafka } from "kafkajs";
 import {ReviewService} from "../../../services/review.service";
 import {ReviewRepository} from "../../../infrastructure/data-access/repositories/review.repository";
 import { randomUUID } from "crypto";
+import { CacheEnabledStrategy } from "../../data-access/cache/strategy.cache";
 
-const reviewRepository = new ReviewRepository();
+const cacheStrategy = new CacheEnabledStrategy()
+const reviewRepository = new ReviewRepository(cacheStrategy);
 const reviewService = new ReviewService(reviewRepository);
 
 export const kafka = new Kafka({

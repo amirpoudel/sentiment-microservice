@@ -6,6 +6,7 @@ import { reviews } from '../db/schema';
 import { UUID } from 'crypto';
 
 import { setCache,getCache, generateCacheKey } from '../cache/redis.cache';
+import { CacheStrategy } from '../../../interface/cache.interface';
 
 
 const buildQuery = (table: typeof reviews,query:ReviewsQuery)=>{
@@ -31,8 +32,10 @@ const buildQuery = (table: typeof reviews,query:ReviewsQuery)=>{
 
 export class ReviewRepository implements IReviewRepository{
     private db ;
-    constructor() {
+    private cache : CacheStrategy;
+    constructor(cacheStrategy:CacheStrategy){ 
         this.db = db;
+        this.cache = cacheStrategy;
     }
 
 
@@ -47,7 +50,7 @@ export class ReviewRepository implements IReviewRepository{
      
         const cacheKey = generateCacheKey('reviews',query);
         console.log('Cache key:',cacheKey);
-        const cache = await getCache(cacheKey);
+        const cache = this.cache.getCache(cacheKey);
         if(cache){
             console.log('Cache hit');
             return cache;
@@ -55,7 +58,7 @@ export class ReviewRepository implements IReviewRepository{
         console.log('Cache miss');
         const response =  await this.db.select().from(reviews).where(where).limit(query.limit).offset(query.offset).execute();
         // set cache
-        await setCache(cacheKey,response);
+        await this.cache.setCache(cacheKey,response);
         return response;
     }
 }
