@@ -17,3 +17,17 @@ export interface ReviewCreateInput extends Omit<Review, 'id' | 'createdAt' | 'up
 
 
 
+export interface ReviewsQuery {
+    limit: number;
+    offset: number;
+    filter?: { 
+        bulkProcessId?: string;
+    }
+    sort?: {
+        field: string;
+        order: 'asc' | 'desc'; 
+    }
+
+}
+
+

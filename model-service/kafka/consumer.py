@@ -10,7 +10,7 @@ import json
 # Kafka Consumer Configuration
 conf = {
     'bootstrap.servers': '192.168.1.66:9092',
-    'group.id': 'result-service',
+    'group.id': 'new-reviews-group',
     'auto.offset.reset': 'earliest'
 }
 
@@ -55,6 +55,7 @@ def consumeMessage():
             print(result)
             #produce message
             data = {
+                'bulkProcessId': message['bulkProcessId'],
                 'customerId': message['customerId'],
                 'customerName': message['customerName'],
                 'review': message['review'],

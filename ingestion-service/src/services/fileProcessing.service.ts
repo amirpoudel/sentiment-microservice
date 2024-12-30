@@ -13,13 +13,18 @@ export default class FileProcessingService implements IFileProcessingService{
 
     }
 
-    processCSVFile = trycatchWrapper(async(filePath:string)=>{
+    processCSVFile = trycatchWrapper(async(filePath:string,bulkProcessId:string)=>{
         // process csv file using stream and push all data to kafka
         const stream = fs.createReadStream(filePath).pipe(csvParser())
+
         stream.on("data",async (row)=>{
             console.log("Row : ",row)
             // push each row to kafka
-            await produceMessage('reviews' ,JSON.stringify(row))
+            const data = {
+                bulkProcessId,
+                ...row
+            }
+            await produceMessage('reviews' ,JSON.stringify(data))
             
         })
 

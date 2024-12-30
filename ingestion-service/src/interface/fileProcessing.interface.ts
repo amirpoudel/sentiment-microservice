@@ -2,6 +2,6 @@
 
 export interface IFileProcessingService{
 
-    processCSVFile(filePath:string):Promise<void>
+    processCSVFile(filePath:string,bulkProcessId:string):Promise<void>
 
 }

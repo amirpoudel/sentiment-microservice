@@ -1,6 +1,7 @@
 import { Kafka } from "kafkajs";
 import {ReviewService} from "../../../services/review.service";
 import {ReviewRepository} from "../../../infrastructure/data-access/repositories/review.repository";
+import { randomUUID } from "crypto";
 
 const reviewRepository = new ReviewRepository();
 const reviewService = new ReviewService(reviewRepository);
@@ -17,14 +18,14 @@ export async function consumeMessage(){
 
     const consumer = kafka.consumer(
         {
-            groupId:"review"
+            groupId:"reviews-result-group"
         }
     )
 
     await consumer.connect();
 
     await consumer.subscribe({
-        topics:['rresult-service'] , fromBeginning:true
+        topics:['reviews-result'] , fromBeginning:true
     })
 
     // options
@@ -36,7 +37,14 @@ export async function consumeMessage(){
             console.log(` [${topic}] : PART: ${partition} : }`,message?.value!.toString())
             const input = JSON.parse(message?.value!.toString())
             console.log("parse input",input)
-            reviewService.createReview(input)
+            const data = {
+                bulkProcessId: input.bulkProcessId,
+                userId: randomUUID(),
+                title: input.review,
+                sentiment: input.sentiment,
+                
+            }
+            reviewService.createReview(data)
 
 
         }

@@ -3,6 +3,7 @@ import asyncHandler from "../../../lib/async/express.async";
 import { Request,Response } from "express";
 import { AppError } from "../../../lib/error/app.error";
 import { IFileProcessingService } from "../../../interface/fileProcessing.interface";
+import { randomUUID } from "crypto";
 
 
 
@@ -20,9 +21,12 @@ export class UploadFileController {
         }
 
         // after success fully upload. call the stream for process
-        this.fileProcessingService.processCSVFile(filePath);
+        const bulkProcessId = randomUUID();
+        this.fileProcessingService.processCSVFile(filePath,bulkProcessId);
 
-        return res.status(200).json(new ApiResponse(200,{},"Upload successfully"))
+        return res.status(200).json(new ApiResponse(200,{
+            bulkProcessId
+        },"Upload successfully"))
 
     })
 

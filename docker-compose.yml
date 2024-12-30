@@ -1,5 +1,3 @@
-
-
 version: '3.7'
 
 services:
@@ -11,15 +9,31 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
     ports:
       - "2181:2181"
+    volumes:
+      - zookeeper_data:/bitnami/zookeeper
 
   kafka:
     image: confluentinc/cp-kafka
     environment:
       - KAFKA_ZOOKEEPER_CONNECT=192.168.1.66:2181
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.66:9092 
-      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 
-
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_LOG_DIRS=/var/lib/kafka/data
     ports:
       - "9092:9092"
     depends_on:
       - zookeeper
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  zookeeper_data:
+  kafka_data:
+  redis_data:

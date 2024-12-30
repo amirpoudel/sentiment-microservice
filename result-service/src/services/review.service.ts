@@ -1,4 +1,4 @@
-import { ReviewCreateInput } from "../entities/review.entity";
+import { ReviewCreateInput, ReviewsQuery } from "../entities/review.entity";
 import { IReviewRepository, IReviewService } from "../interface/review.interface";
 import { trycatchWrapper } from "../lib/async/trycatch.async";
 
@@ -11,6 +11,10 @@ export class ReviewService implements IReviewService{
 
     createReview = trycatchWrapper(async (input: ReviewCreateInput) => {
         return await this.reviewRepository.createReview(input);
+    })
+
+    getReviews = trycatchWrapper(async (query:ReviewsQuery) => {
+        return await this.reviewRepository.getReviews(query);
     })
 }
 

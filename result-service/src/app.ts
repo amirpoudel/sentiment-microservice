@@ -37,11 +37,11 @@ app.use('/api/v1/storage',express.static('./storage'));
 
 
 //import routes
-
-
 import { expressErrorHandler } from './lib/error/handler.error';
 
+import reviewsRouter from './presentation/express/routes/review.route';
 
+app.use('/api/v1/reviews', reviewsRouter);
 
 
 //Global error handler
