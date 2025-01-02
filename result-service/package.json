@@ -4,7 +4,7 @@
 
     "generate": "drizzle-kit generate --out ./src/infrastructure/data-access/db/migrations --schema ./src/infrastructure/data-access/db/schema.ts --dialect postgresql",
 
-    "migrate": "node -r ts-node/register --env-file=.env ./src/infrastructure/data-access/db/migrate.ts  ",
+    "migrate": "node -r ts-node/register --env-file=.env ./src/infrastructure/data-access/db/migrate.ts",
 
     "db:seed": "ts-node ./src/infrastructure/data-access/db/seed.ts"
 

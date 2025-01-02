@@ -2,9 +2,9 @@
 
 export interface Review {
     id: string;
-    bulkProcessId: string;
-    userId: string;
-    title: string;
+    processId: string;
+    reviewId: string;
+    review: string;
     sentiment: string;
     score?: number;
     remarks?: string;
@@ -12,22 +12,26 @@ export interface Review {
     updatedAt?: string;
 }
 
-
 export interface ReviewCreateInput extends Omit<Review, 'id' | 'createdAt' | 'updatedAt'> {}
 
 
 
-export interface ReviewsQuery {
-    limit: number;
-    offset: number;
-    filter?: { 
-        bulkProcessId?: string;
-    }
-    sort?: {
-        field: string;
-        order: 'asc' | 'desc'; 
-    }
-
+export interface ReviewsGetResponse{
+    reviews: Review[]
+    total:number
 }
 
 
+export interface ReviewsGetQueryOptions{
+    limit:number;
+    offset:number;
+    search?:string;
+    filter?:{
+        processId?:string
+        sentiment?:string
+    },
+    sort?:{
+        field:string
+        order:'asc' | 'desc'
+    }
+}

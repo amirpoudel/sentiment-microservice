@@ -13,9 +13,20 @@ def sentimentAnalysis(text):
    
 
     sentiment_label, scores = result
+    score = 0
     sentiment_labels = ["Negative", "Neutral", "Positive"]
+    if sentiment_label == "negative":
+        score = scores[0]
 
-    return result  
+    if sentiment_label == "neutral":
+        score = scores[1]
+
+    if sentiment_label == "positive":
+        score = scores[2]
+
+    
+
+    return [sentiment_label,score]  
 
 
 

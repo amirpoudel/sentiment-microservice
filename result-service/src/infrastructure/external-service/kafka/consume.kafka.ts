@@ -40,13 +40,19 @@ export async function consumeMessage(){
             const input = JSON.parse(message?.value!.toString())
             console.log("parse input",input)
             const data = {
-                bulkProcessId: input.bulkProcessId,
-                userId: randomUUID(),
-                title: input.review,
+                processId: input.processId,
+                reviewId: input.reviewId,
+                review: input.review,
                 sentiment: input.sentiment,
-                
+                score: Number(input.score)
             }
-            reviewService.createReview(data)
+            console.log("data",data)
+            try {
+               const response =  await reviewService.createReview(data)
+                console.log("response",response)
+            } catch (error) {
+                console.log("Error while insert in db",error)
+            }
 
 
         }

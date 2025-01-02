@@ -48,19 +48,21 @@ def consumeMessage():
                     continue
                 else:
                     raise KafkaException(msg.error())
-            print(f"Received message: {msg.value().decode('utf-8')}")
+            
             message = json.loads(msg.value().decode('utf-8'))
-            print(f"Review: {message}")
+        
             result = sentimentAnalysis(message['review'])
             print(result)
             #produce message
+
             data = {
-                'bulkProcessId': message['bulkProcessId'],
-                'customerId': message['customerId'],
-                'customerName': message['customerName'],
+                'processId': message['processId'],
+                'reviewId': message['reviewId'],
                 'review': message['review'],
                 'sentiment': result[0],
+                'score':result[1]
             }
+            
 
             produceMessage(json.dumps(data))
 
