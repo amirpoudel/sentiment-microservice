@@ -10,7 +10,7 @@ const reviewService = new ReviewService(reviewRepository);
 
 export const kafka = new Kafka({
     clientId: 'reviews',
-    brokers: ["192.168.1.66:9092"]
+    brokers: ["192.168.1.68:9092"]
 })
 
 
