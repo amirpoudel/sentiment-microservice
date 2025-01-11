@@ -8,8 +8,8 @@ export interface User{
     address?: string;
     profileImage?: string;
 
-    createdAt:string;
-    updatedAt:string;
+    createdAt?:string;
+    updatedAt?:string;
 }
 
 

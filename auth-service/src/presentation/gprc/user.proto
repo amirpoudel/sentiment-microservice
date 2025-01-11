@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+pacakge user;
+
+service UserService{
+    // define a Unary RPC method
+    rpc getUserByEmail (getUserByEmailRequest) return (getUserByEmailResponse);
+}
+
+
+message getUserByEmailRequest{
+    string email = 1;
+}
+
+
+message getUserByEmailResponse{
+    string userId = 1;
+    string email = 1;
+}

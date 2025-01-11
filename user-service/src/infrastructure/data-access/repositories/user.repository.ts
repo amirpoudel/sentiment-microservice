@@ -1,4 +1,4 @@
-import { User } from "../../../entities/user.entity"
+import { User, UserCreateInput } from "../../../entities/user.entity"
 import { IUserRepository } from "../../../interface/user.interface";
 import { trycatchWrapperMongo } from "../../../lib/async/trycatch.async"
 import { IUserDocument, UserModel } from "../db/user.model"
@@ -7,7 +7,7 @@ import { IUserDocument, UserModel } from "../db/user.model"
 export  class UserRepository implements IUserRepository{
 
 
-    createUser = trycatchWrapperMongo(async(user:User):Promise<IUserDocument|null>=>{
+    createUser = trycatchWrapperMongo(async(user:UserCreateInput):Promise<IUserDocument|null>=>{
         return await UserModel.create(user);
     })
 

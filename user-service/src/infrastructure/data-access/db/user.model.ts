@@ -22,6 +22,9 @@ const userSchema = new Schema<IUserDocument>({
     },
     profileImage:{
         type:String
+    },
+    address:{
+        type:String
     }
 },{
     timestamps:true

@@ -7,6 +7,8 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 
+
+
 // Define the allowed origins from the environment variable CORS_ORIGIN
 console.log("CORS_ORIGIN", process.env.CORS_ORIGIN);
 const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(",") : [];
@@ -40,6 +42,7 @@ app.use('/api/v1/storage',express.static('./storage'));
 import { expressErrorHandler } from './lib/error/handler.error';
 
 import userRoutes from '../src/presentation/express/routes/user.route'
+
 
 app.use('/api/v1/users', userRoutes);
 

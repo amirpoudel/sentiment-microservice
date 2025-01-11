@@ -15,8 +15,10 @@ model-service/sentiment_model_uncased
 model-service/kafka/__pycache__/consumer.cpython-312.pyc
 
 
+
 user-service/node_modules
 
+auth-service/node_modules
 
 # Logs
 logs

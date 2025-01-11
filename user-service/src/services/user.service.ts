@@ -1,4 +1,4 @@
-import { User } from "../entities/user.entity";
+import { User, UserCreateInput } from "../entities/user.entity";
 import { IUserRepository, IUserService } from "../interface/user.interface";
 import { trycatchWrapper } from "../lib/async/trycatch.async";
 
@@ -12,12 +12,14 @@ export class UserService implements IUserService{
     }
 
 
-    createUser = trycatchWrapper(async(user:User)=>{
-        return this.userRepository.createUser(user)
+    createUser = trycatchWrapper(async(user:UserCreateInput)=>{
+        console.log("User Service")
+        console.log(user)
+        return await this.userRepository.createUser(user)
     })
 
     getUserByEmail = trycatchWrapper(async(email:string)=>{
-        return this.getUserByEmail(email)
+        return await this.getUserByEmail(email)
     })
 
 

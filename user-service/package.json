@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@grpc/grpc-js": "^1.12.5",
+    "@grpc/proto-loader": "^0.7.13",
     "@neondatabase/serverless": "^0.10.4",
     "@types/bcrypt": "^5.0.2",
     "cookie-parser": "^1.4.7",

@@ -1,5 +1,4 @@
 export const COOKIE_OPTIONS = {
-    
     path: '/',
     httpOnly: true,
     secure: true, // Change this to false for local development
