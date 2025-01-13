@@ -1,6 +1,8 @@
 import path from "path";
 import * as grpc from "@grpc/grpc-js";
 import * as protoLoader from '@grpc/proto-loader';
+import { UserRepository } from "../../infrastructure/data-access/repositories/user.repository";
+import { UserService } from "../../services/user.service";
 
 
 
@@ -16,8 +18,10 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 const userServiceProto = grpc.loadPackageDefinition(packageDefinition).user as any;
 
+const userRepository = new UserRepository()
+const userService = new UserService(userRepository)
 // Define the gRPC method implementation
-function getUserByEmail(call:any, callback:any) {
+async function getUserByEmail(call:any, callback:any) {
   const email = call.request.email as string;
   if (!email) {
     return callback({
@@ -25,21 +29,13 @@ function getUserByEmail(call:any, callback:any) {
       code: grpc.status.INVALID_ARGUMENT,
     });
   }
-
-
-
-  const user = {
-    userId:"452153336",
-    email:"amirpoudel2058@gmail.com"
-  };
-
+  const user = await userService.getUserByEmail(email) 
   if (!user) {
     return callback({
       message: "User not found",
       code: grpc.status.NOT_FOUND,
     });
   }
-
   callback(null, user);
 }
 

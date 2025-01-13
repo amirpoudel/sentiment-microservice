@@ -4,10 +4,11 @@ dotenv.config({path:'./.env'});
 import app from './app';
 import { connectToDatabase } from './infrastructure/config';
 
-const PORT = process.env.PORT || 4000;
+
+const PORT = process.env.PORT || 6000;
 
 // connecto to mongodb
-connectToDatabase();
+//connectToDatabase();
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
