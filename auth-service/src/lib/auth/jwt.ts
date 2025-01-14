@@ -30,3 +30,11 @@ export const verifyRefreshToken = (token: string): JwtPayload => {
         throw AppError.invalidCredentials("Invalid refresh token");
     }
 }
+
+export const verifyAccessToken = (token:string):any =>{
+    try{
+        return jwt.verify(token,accessTokenSecret) ;
+    }catch(error){
+        throw AppError.invalidCredentials("Invalid access token")
+    }
+}

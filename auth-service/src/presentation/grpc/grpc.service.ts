@@ -1,18 +1,18 @@
 import { AppError } from "backend-error-handler";
 import { userStub } from "./grpc.server";
+import { UserGRPCResponse } from "../../entities/auth.entity";
 
 
-export async function findUser(email:string){
+export async function findUser(email:string):Promise<UserGRPCResponse | null>{
    // userStub.getUserByEmail({email:email})
-    await userStub.getUserByEmail({email:email},(err:any,user:any)=>{
+   return new Promise((resolve,reject)=>{
+    userStub.getUserByEmail({email:email},(err:any,user:any)=>{
         if(err){
-            console.log(err)
-            throw AppError.notFound("User Not Found")
+            return resolve(null)
         }
         console.log('User Found')
         console.log(user)
-        return user
+        return resolve(user)
     })
-    
-    
+   })
 }

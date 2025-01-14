@@ -1,4 +1,24 @@
 
+export interface Process{
+    id:string,
+    userId:string,
+    isProcessFromFile:boolean,
+    isBulkProcess:boolean,
+    totalProcessCount:number,
+    totalInputLength:number,
+    createdAt: string,
+    updatedAt: string,
+
+}
+
+
+export interface ProcessCreateInput extends Omit<Process, 'id'| 'createdAt' | 'updatedAt'>{
+
+}
+
+
+
+
 export interface Review{
     reviewId?:string; //custom field for users to provide their own review id 
     review:string;   
@@ -16,4 +36,6 @@ export interface ReviewProcessResponse{
 export interface BulkReviewsProcessResponse{
     processId: string
 }
+
+
 

@@ -7,6 +7,7 @@ const controller = new AuthController(service)
 const router = Router()
 
 router.post("/login",controller.login)
+router.post("/verify-access-token",controller.verifyAccessToken)
 
 
 export default router

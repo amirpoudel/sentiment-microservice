@@ -30,3 +30,24 @@ export interface UsersGetQueryOptions{
         order:'asc' | 'desc'
     }
 }
+
+
+export interface UserGRPCResponse{
+    id: string,
+    name:string,
+    email:string,
+    password:string
+}
+
+export interface LoginResponse{
+    id:string,
+    name:string,
+    email:string,
+    accessToken:string
+}
+
+export interface VerifyTokenResponse{
+    id:string,
+    name:string,
+    email:string
+}

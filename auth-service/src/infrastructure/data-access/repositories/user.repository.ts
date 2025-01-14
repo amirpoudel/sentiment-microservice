@@ -1,5 +1,5 @@
 import { User, UserCreateInput } from "../../../entities/auth.entity"
-import { IUserRepository } from "../../../interface/user.interface";
+import { IUserRepository } from "../../../interface/auth.interface";
 import { trycatchWrapperMongo } from "../../../lib/async/trycatch.async"
 import { IUserDocument, UserModel } from "../db/user.model"
 

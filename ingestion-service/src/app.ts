@@ -52,10 +52,10 @@ app.use('/api/v1/storage',express.static('./storage'));
 
 import { expressErrorHandler } from './lib/error/handler.error';
 
-import uploadFileRoutes from './presentation/express/routes/upload-file.route';
-import reviewRoutes from './presentation/express/routes/review.route';
 
-app.use('/api/v1/upload-file',uploadFileRoutes);
+import reviewRoutes from './presentation/express/routes/process.route';
+
+
 app.use('/api/v1/reviews',reviewRoutes);
 
 
