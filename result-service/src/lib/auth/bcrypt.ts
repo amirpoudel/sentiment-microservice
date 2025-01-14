@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from '../../../../auth-service/node_modules/@types/bcrypt';
 
 
 const saltRounds = 10;

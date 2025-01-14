@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload } from "../../../../auth-service/node_modules/@types/jsonwebtoken";
 import { AppError } from "../error/app.error";
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET as string;

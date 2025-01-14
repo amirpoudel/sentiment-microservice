@@ -19,7 +19,7 @@ export class UserService implements IUserService{
     })
 
     getUserByEmail = trycatchWrapper(async(email:string)=>{
-        return await this.getUserByEmail(email)
+        return await this.userRepository.getUserByEmail(email)
     })
 
 

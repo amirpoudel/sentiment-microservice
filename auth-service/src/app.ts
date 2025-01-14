@@ -41,7 +41,7 @@ app.use('/api/v1/storage',express.static('./storage'));
 //import routes
 import { expressErrorHandler } from 'backend-error-handler';
 
-import authRoutes from '../src/presentation/express/routes/auth.route'
+import authRoutes from './presentation/express/routes/auth.route'
 
 app.use("/api/v1/auth",authRoutes)
 

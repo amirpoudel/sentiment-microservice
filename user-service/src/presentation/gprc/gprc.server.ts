@@ -30,13 +30,20 @@ async function getUserByEmail(call:any, callback:any) {
     });
   }
   const user = await userService.getUserByEmail(email) 
+  const userResponse = {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    password: user.password
+  }
+  console.log("Logs user from grpc",user)
   if (!user) {
     return callback({
       message: "User not found",
       code: grpc.status.NOT_FOUND,
     });
   }
-  callback(null, user);
+  callback(null, userResponse);
 }
 
 // Create the gRPC server

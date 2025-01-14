@@ -1,4 +1,4 @@
-import { trycatchWrapper } from "backend-error-handler";
+import {trycatchWrapper} from "backend-error-handler";
 import { IAuthService } from "../interface/user.interface";
 import { findUser } from "../presentation/grpc/grpc.service";
 

@@ -12,6 +12,8 @@ message GetUserByEmailRequest {
 }
 
 message GetUserByEmailResponse {
-    string userId = 1;
-    string email = 2;
+   string id = 1;
+   string name = 2;
+   string email = 3;
+   string password = 4;
 }
