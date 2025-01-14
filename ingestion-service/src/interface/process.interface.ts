@@ -4,9 +4,9 @@ export interface IProcessReviewService{
 
     insertBulkReview(bulkReview:BulkReviews):Promise<ReviewProcessResponse>
 
-    insertReview(review:Review):Promise<BulkReviewsProcessResponse>
+    insertReview(userId:string,review:Review):Promise<BulkReviewsProcessResponse>
 
-    processCSVFile(filePath:string,bulkProcessId:string):Promise<void>
+    processCSVFile(filePath:string,userId:string):Promise<void>
 
 }
 

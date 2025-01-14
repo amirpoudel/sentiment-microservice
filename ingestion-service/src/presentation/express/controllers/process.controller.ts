@@ -16,30 +16,32 @@ export class ProcessReviewController{
     }
 
     insertBulkReview = asyncHandler(async (req:Request,res:Response)=>{
+        const userId = req.user.id; // this will present from authorization service
         const bulkReviews = req.body.data;
+        bulkReviews.userId = userId
         const response = await this.processReviewService.insertBulkReview(bulkReviews);
         return res.status(200).json(new ApiResponse(200,response,"Bulk review inserted successfully"))
     })
 
     insertReview = asyncHandler(async (req:Request,res:Response)=>{
+        const userId = req.user.id;
         const review = req.body.data;
-        const response = await this.processReviewService.insertReview(review);
+        const response = await this.processReviewService.insertReview(userId,review);
         return res.status(200).json(new ApiResponse(200,response,"Review inserted successfully"))
     })
 
     uploadFile = asyncHandler(async(req:Request,res:Response)=>{
-   
+        const userId = req.user.id
         const filePath = req.file?.path;
         if(!filePath){
             throw AppError.badRequest("Unable to upload file ! please try again");
         }
 
         // after success fully upload. call the stream for process
-        const bulkProcessId = randomUUID();
-        this.processReviewService.processCSVFile(filePath,bulkProcessId);
+        this.processReviewService.processCSVFile(filePath,userId);
 
         return res.status(200).json(new ApiResponse(200,{
-            bulkProcessId
+        
         },"Upload successfully"))
 
     })

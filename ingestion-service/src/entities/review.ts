@@ -12,7 +12,7 @@ export interface Process{
 }
 
 
-export interface ProcessCreateInput extends Omit<Process, 'id'| 'createdAt' | 'updatedAt'>{
+export interface ProcessCreateInput extends Omit<Process,'createdAt' | 'updatedAt'>{
 
 }
 
@@ -25,6 +25,7 @@ export interface Review{
 }
 
 export interface BulkReviews {
+    userId:string,
     reviews: Review[];
 }
 
