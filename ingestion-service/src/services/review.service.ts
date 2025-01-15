@@ -47,6 +47,7 @@ export  class ProcessReviewService implements IProcessReviewService {
             console.log(review)
             await produceMessage('reviews',JSON.stringify({
                 processId,
+                userId,
                 ...review
             }))
             await this.repository.insertProcessMetadata({
@@ -76,6 +77,7 @@ export  class ProcessReviewService implements IProcessReviewService {
                 // push each row to kafka
                 const data = {
                     processId,
+                    userId,
                     ...row
                 }
                 await produceMessage('reviews' ,JSON.stringify(data))

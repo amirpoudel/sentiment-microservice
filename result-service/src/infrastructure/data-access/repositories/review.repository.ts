@@ -18,6 +18,9 @@ const buildQuery = (table: typeof analysisReviews, query: ReviewsGetQueryOptions
     const conditions: SQL[] = [];
     if (filter) {
         Object.keys(filter).forEach((key: string) => {
+            if (key === "userId"){
+                conditions.push(eq(table?.userId,filter.userId!));
+            }
             if (key === "processId") {
                 conditions.push(eq(table?.processId, filter.processId!));
             }

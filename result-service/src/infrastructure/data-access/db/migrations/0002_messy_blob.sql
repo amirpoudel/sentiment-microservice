@@ -1,0 +1,1 @@
+ALTER TABLE "analysis_reviews" ADD COLUMN "user_id" varchar;

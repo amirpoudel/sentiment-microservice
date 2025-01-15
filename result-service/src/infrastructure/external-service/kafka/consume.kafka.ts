@@ -41,6 +41,7 @@ export async function consumeMessage(){
             console.log("parse input",input)
             const data = {
                 processId: input.processId,
+                userId: input.userId,
                 reviewId: input.reviewId,
                 review: input.review,
                 sentiment: input.sentiment,

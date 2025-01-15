@@ -48,29 +48,29 @@ def consumeMessage():
                     continue
                 else:
                     raise KafkaException(msg.error())
-            
+           
             message = json.loads(msg.value().decode('utf-8'))
-        
-            result = sentimentAnalysis(message['review'])
-            print(result)
-            #produce message
 
-            data = {
-                'processId': message['processId'],
-                'reviewId': message['reviewId'],
-                'review': message['review'],
-                'sentiment': result[0],
-                'score':result[1]
-            }
-            
+            # Check if 'review' key exists in the message
+            if 'review' in message:
+                result = sentimentAnalysis(message['review'])
+                print(result)
+                
+                # Produce message
+                data = {
+                    'processId': message.get('processId'),
+                    'userId': message.get('userId'),
+                    'reviewId': message.get('reviewId'),
+                    'review': message['review'],
+                    'sentiment': result[0],
+                    'score': result[1]
+                }
 
-            produceMessage(json.dumps(data))
-
-            
-
+                produceMessage(json.dumps(data))
+            else:
+                print("Key 'review' not found in the message")
+                
     except KeyboardInterrupt:
         pass
     finally:
         consumer.close()
-
-

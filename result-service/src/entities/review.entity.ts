@@ -3,6 +3,7 @@
 export interface Review {
     id: string;
     processId: string;
+    userId:string,
     reviewId: string;
     review: string;
     sentiment: string;
@@ -29,6 +30,7 @@ export interface ReviewsGetQueryOptions{
     filter?:{
         processId?:string
         sentiment?:string
+        userId?:string
     },
     sort?:{
         field:string
