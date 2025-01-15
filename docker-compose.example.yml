@@ -71,7 +71,7 @@ services:
   user-service:
     image:  amirpoudel/sm-user-service
     environment:
-      - MONGODB_URI="mongodb+srv://rms-nodejs:Yw5ReVYTL0obliM6@cluster0.8rxpgkr.mongodb.net/sm-users?retryWrites=true&w=majority"
+      # - MONGODB_URI="mongodb+srv://rms-nodejs:Yw5ReVYTL0obliM6@cluster0.8rxpgkr.mongodb.net/sm-users?retryWrites=true&w=majority"
     networks:
       - internal_network
 

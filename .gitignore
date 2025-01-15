@@ -20,6 +20,8 @@ user-service/node_modules
 
 auth-service/node_modules
 
+docker-compose.yml
+
 # Logs
 logs
 *.log
