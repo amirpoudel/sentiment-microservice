@@ -1,4 +1,4 @@
-import { BulkReviews, BulkReviewsProcessResponse, Review, ReviewProcessResponse } from "../entities/process";
+import { BulkReviews, BulkReviewsProcessResponse, ProcessReviewsGetQueryOptions, Review, ReviewProcessResponse } from "../entities/process";
 import { produceMessage } from "../infrastructure/external-service/kafka/producer.kafka";
 import { IProcessReviewRepository, IProcessReviewService } from "../interface/process.interface";
 import { trycatchWrapper } from "../lib/async/trycatch.async";
@@ -106,6 +106,10 @@ export  class ProcessReviewService implements IProcessReviewService {
                 totalProcessCount: totalProcessCount,
                 totalInputLength:totalInputLength
             })
+        })
+
+        getProcessMetadata = trycatchWrapper(async(query:ProcessReviewsGetQueryOptions)=>{
+            return await this.repository.getProcessMetadata(query)
         })
 
 

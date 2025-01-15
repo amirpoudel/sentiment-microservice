@@ -16,6 +16,6 @@ router.route("/bulk").post(controller.insertBulkReview);
 
 router.route("/upload-file").post(upload.single('csv'),controller.uploadFile)
 
-router.route("/")
+router.route("/").get(controller.getProcessMetadata)
 
 export default router

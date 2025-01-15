@@ -4,6 +4,7 @@ import asyncHandler from "../../../lib/async/express.async";
 import ApiResponse from "../../../lib/api/response.api";
 import { randomUUID } from "crypto";
 import { AppError } from "../../../lib/error/app.error";
+import { getRequestQuery } from "../../../lib/helper/helper";
 
 
 
@@ -53,6 +54,19 @@ export class ProcessReviewController{
         return res.status(200).json(new ApiResponse(200,{
         
         },"Upload successfully"))
+
+    })
+
+    getProcessMetadata = asyncHandler(async(req:Request,res:Response)=>{
+        const userId = req.headers["x-user-id"] as string;
+        if(!userId){
+            throw AppError.badRequest("User Id Required in headers")
+        }
+        
+        const query = getRequestQuery(req.query)
+        query.filter.userId  = userId
+        const response = await this.processReviewService.getProcessMetadata(query)
+        return res.status(200).json(new ApiResponse(200,response,"Fetch sucess"))
 
     })
 

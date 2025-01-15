@@ -1,4 +1,4 @@
-import { BulkReviews, BulkReviewsProcessResponse, ProcessCreateInput, Review, ReviewProcessResponse } from "../entities/process"
+import { BulkReviews, BulkReviewsProcessResponse, ProcessCreateInput, ProcessReviewsGetQueryOptions, Review, ReviewProcessResponse } from "../entities/process"
 
 export interface IProcessReviewService{
 
@@ -8,12 +8,16 @@ export interface IProcessReviewService{
 
     processCSVFile(filePath:string,userId:string):Promise<void>
 
+    getProcessMetadata(query:ProcessReviewsGetQueryOptions):Promise<any>
+
 }
 
 
 export interface IProcessReviewRepository{
     
     insertProcessMetadata(input:ProcessCreateInput):Promise<any>
+
+    getProcessMetadata(query:ProcessReviewsGetQueryOptions):Promise<any>
     
 
 }

@@ -40,3 +40,15 @@ export interface BulkReviewsProcessResponse{
 
 
 
+export interface ProcessReviewsGetQueryOptions{
+    limit:number;
+    offset:number;
+    search?:string;
+    filter?:{
+        userId?:string
+    },
+    sort?:{
+        field:string
+        order:'asc' | 'desc'
+    }
+}
