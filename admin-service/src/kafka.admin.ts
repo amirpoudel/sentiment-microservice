@@ -2,7 +2,7 @@ import { Kafka } from "kafkajs";
 
 export const kafka = new Kafka({
   clientId: "reviews",
-  brokers: ["192.168.1.68:9092"],
+  brokers: [process.env.KAFKA_BROKER!],
 });
 
 export async function kafkaInit() {

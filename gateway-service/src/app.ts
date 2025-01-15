@@ -18,8 +18,6 @@ const proxyMiddleware = (target: string) => {
             req.headers['x-user-id'] = user.id;
             req.headers['x-user-name'] = user.name;
             req.headers['x-user-email'] = user.email;
-        }else{
-            res.status(500).send('Authentication Fail - no user data present')
         }
         
 
@@ -29,6 +27,11 @@ const proxyMiddleware = (target: string) => {
         });
     };
 };
+
+const authServiceURL = process.env.AUTH_SERVICE_URL
+const ingestionServiceURL = process.env.INGESTION_SERVICE_URL
+const resultServiceURL = process.env.RESULT_SERVICE_URL
+const usersServcieURL = process.env.USERS_SERVICE_URL
 
 // Authentication middleware
 const authMiddleware = async (req: Request, res: Response, next: NextFunction):Promise<any> => {
@@ -49,7 +52,7 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction):P
         }
 
         const authResponse = await axios.post(
-            'http://172.17.0.1:6000/api/v1/auth/verify-access-token',
+            `${authServiceURL}/auth/verify-access-token`,
             {},
             { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -71,10 +74,10 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction):P
 };
 
 // Routes
-app.use('/api/v1/ingestion', authMiddleware, proxyMiddleware('http://172.17.0.1:5000/api/v1/'));
-app.use('/api/v1/result', authMiddleware, proxyMiddleware('http://172.17.0.1:7000/api/v1/'));
-app.use('/api/v1/users', authMiddleware, proxyMiddleware('http://172.17.0.1:4000/api/v1/'));
-app.use('/api/v1/auth', proxyMiddleware('http://172.17.0.1:6000/api/v1/'));
+app.use('/api/v1/ingestion', authMiddleware, proxyMiddleware(`${ingestionServiceURL}/`));
+app.use('/api/v1/result', authMiddleware, proxyMiddleware(`${resultServiceURL}/`));
+app.use('/api/v1/users', authMiddleware, proxyMiddleware(`${usersServcieURL}/`));
+app.use('/api/v1/auth', proxyMiddleware(`${authServiceURL}/`));
 
 // Error handling for unmatched routes
 app.use((req: Request, res: Response) => {

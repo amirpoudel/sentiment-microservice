@@ -6,7 +6,10 @@
 
     "migrate": "node -r ts-node/register --env-file=.env ./src/infrastructure/data-access/db/migrate.ts",
 
-    "db:seed": "ts-node ./src/infrastructure/data-access/db/seed.ts"
+    "db:seed": "ts-node ./src/infrastructure/data-access/db/seed.ts",
+
+    "build": "tsc",
+    "start": "node dist/server.js"
 
   },
 

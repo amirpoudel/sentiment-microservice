@@ -13,7 +13,7 @@ const UserService = userProto.user.UserService;
 
 // Create a stub for the `UserService`
 export const userStub = new UserService(
-    '0.0.0.0:40001', 
+    process.env.GRPC_ENDPOINT!, 
     grpc.credentials.createInsecure()
 );
 

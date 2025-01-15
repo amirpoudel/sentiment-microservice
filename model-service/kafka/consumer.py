@@ -2,14 +2,21 @@
 
 from confluent_kafka import Consumer, Producer , KafkaException # type: ignore
 from analysis import sentimentAnalysis
+from dotenv import load_dotenv # type: ignore
+import os
+
+# Load environment variables from the .env file
+load_dotenv()
 
 
 
 import json
 
+kafka_broker = os.getenv('KAFKA_BROKER')
+
 # Kafka Consumer Configuration
 conf = {
-    'bootstrap.servers': '192.168.1.68:9092',
+    'bootstrap.servers': kafka_broker,
     'group.id': 'new-reviews-group',
     'auto.offset.reset': 'earliest'
 }
@@ -18,7 +25,7 @@ conf = {
 #due to some error define producer here
 # Define Kafka producer configuration
 producerConf = {
-    'bootstrap.servers': '192.168.1.68:9092',  # Kafka broker address
+    'bootstrap.servers': kafka_broker,  # Kafka broker address
     'client.id': 'reviews'
 }
 

@@ -1,8 +1,16 @@
 from confluent_kafka import Producer # type: ignore
+from dotenv import load_dotenv # type: ignore
+import os
 
+# Load environment variables from the .env file
+load_dotenv()
+
+
+
+kafka_broker = os.getenv('KAFKA_BROKER')
 # Define Kafka producer configuration
 conf = {
-    'bootstrap.servers': '192.168.1.66:9092',  # Kafka broker address
+    'bootstrap.servers': kafka_broker,  # Kafka broker address
     'client.id': 'reviews'
 }
 
