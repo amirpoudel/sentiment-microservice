@@ -19,6 +19,9 @@ export class AuthController {
         }
 
         const loginResponse = await this.service.login(email,password);
+        if(!loginResponse){
+            throw AppError.notFound("User Not Found")
+        }
         return res.status(200).json(new ApiResponse(200,{
             id:loginResponse.id,
             name:loginResponse.name,

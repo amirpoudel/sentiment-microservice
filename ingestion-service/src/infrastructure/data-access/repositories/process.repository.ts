@@ -1,4 +1,4 @@
-import { ProcessCreateInput } from "../../../entities/review";
+import { ProcessCreateInput } from "../../../entities/process";
 import { IProcessReviewRepository } from "../../../interface/process.interface";
 import { db } from "../db";
 import { processReviews } from "../db/schema";

@@ -1,11 +1,10 @@
-import { BulkReviews, BulkReviewsProcessResponse, Review, ReviewProcessResponse } from "../entities/review";
+import { BulkReviews, BulkReviewsProcessResponse, Review, ReviewProcessResponse } from "../entities/process";
 import { produceMessage } from "../infrastructure/external-service/kafka/producer.kafka";
 import { IProcessReviewRepository, IProcessReviewService } from "../interface/process.interface";
 import { trycatchWrapper } from "../lib/async/trycatch.async";
 import crypto from 'crypto'
 import fs from 'fs'
 import csvParser from "csv-parser";
-
 
 export  class ProcessReviewService implements IProcessReviewService {
 
@@ -30,7 +29,7 @@ export  class ProcessReviewService implements IProcessReviewService {
 
             await this.repository.insertProcessMetadata({
                 id:processId,
-                userId:"",
+                userId:bulkReviews.userId,
                 isProcessFromFile:false,
                 isBulkProcess:true,
                 totalProcessCount: totalProcessCount,
@@ -42,16 +41,17 @@ export  class ProcessReviewService implements IProcessReviewService {
 
         })
 
-        insertReview  = trycatchWrapper(async(review:Review):Promise<ReviewProcessResponse>=>{
+        insertReview  = trycatchWrapper(async(userId:string,review:Review):Promise<ReviewProcessResponse>=>{
             // insert single review
             const processId  = crypto.randomUUID()
+            console.log(review)
             await produceMessage('reviews',JSON.stringify({
                 processId,
                 ...review
             }))
             await this.repository.insertProcessMetadata({
                 id:processId,
-                userId:"",
+                userId:userId,
                 isProcessFromFile:false,
                 isBulkProcess:false,
                 totalProcessCount: 1,
@@ -64,7 +64,7 @@ export  class ProcessReviewService implements IProcessReviewService {
         })
 
 
-        processCSVFile = trycatchWrapper(async(filePath:string)=>{
+        processCSVFile = trycatchWrapper(async(filePath:string,userId:string)=>{
             // process csv file using stream and push all data to kafka
             const stream = fs.createReadStream(filePath).pipe(csvParser())
             const processId  = crypto.randomUUID()
@@ -100,7 +100,7 @@ export  class ProcessReviewService implements IProcessReviewService {
             })
             await this.repository.insertProcessMetadata({
                 id:processId,
-                userId:"",
+                userId:userId,
                 isProcessFromFile:false,
                 isBulkProcess:true,
                 totalProcessCount: totalProcessCount,

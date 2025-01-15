@@ -1,0 +1,1 @@
+ALTER TABLE "process_reviews" ALTER COLUMN "user_id" SET DATA TYPE varchar;

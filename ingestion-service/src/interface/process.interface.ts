@@ -1,4 +1,4 @@
-import { BulkReviews, BulkReviewsProcessResponse, ProcessCreateInput, Review, ReviewProcessResponse } from "../entities/review"
+import { BulkReviews, BulkReviewsProcessResponse, ProcessCreateInput, Review, ReviewProcessResponse } from "../entities/process"
 
 export interface IProcessReviewService{
 

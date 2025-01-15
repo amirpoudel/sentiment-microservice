@@ -1,0 +1,1 @@
+ALTER TABLE "process_reviews" ALTER COLUMN "id" SET DEFAULT gen_random_uuid();

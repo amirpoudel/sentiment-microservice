@@ -8,6 +8,20 @@
       "when": 1736861918293,
       "tag": "0000_motionless_leopardon",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1736930324603,
+      "tag": "0001_serious_moon_knight",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1736935318122,
+      "tag": "0002_lethal_multiple_man",
+      "breakpoints": true
     }
   ]
 }

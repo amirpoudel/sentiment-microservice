@@ -16,7 +16,11 @@ export class ProcessReviewController{
     }
 
     insertBulkReview = asyncHandler(async (req:Request,res:Response)=>{
-        const userId = req.user.id; // this will present from authorization service
+
+        const userId = req.headers["x-user-id"] as string;
+        if(!userId){
+            throw AppError.badRequest("User Id Required in headers")
+        }
         const bulkReviews = req.body.data;
         bulkReviews.userId = userId
         const response = await this.processReviewService.insertBulkReview(bulkReviews);
@@ -24,14 +28,20 @@ export class ProcessReviewController{
     })
 
     insertReview = asyncHandler(async (req:Request,res:Response)=>{
-        const userId = req.user.id;
+        const userId = req.headers["x-user-id"] as string;
+        if(!userId){
+            throw AppError.badRequest("User Id Required in headers")
+        }
         const review = req.body.data;
         const response = await this.processReviewService.insertReview(userId,review);
         return res.status(200).json(new ApiResponse(200,response,"Review inserted successfully"))
     })
 
     uploadFile = asyncHandler(async(req:Request,res:Response)=>{
-        const userId = req.user.id
+        const userId = req.headers["x-user-id"] as string;
+        if(!userId){
+            throw AppError.badRequest("User Id Required in headers")
+        }
         const filePath = req.file?.path;
         if(!filePath){
             throw AppError.badRequest("Unable to upload file ! please try again");

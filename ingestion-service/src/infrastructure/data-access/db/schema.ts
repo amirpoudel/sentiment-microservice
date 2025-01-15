@@ -1,4 +1,5 @@
 
+import { varchar } from "drizzle-orm/pg-core"
 import  {serial,uuid , boolean , timestamp , integer , pgTable} from "drizzle-orm/pg-core"
 
 
@@ -6,7 +7,7 @@ import  {serial,uuid , boolean , timestamp , integer , pgTable} from "drizzle-or
 
 export const processReviews = pgTable("process_reviews",{
     id : uuid("id").primaryKey().defaultRandom(),
-    userId: uuid("user_id"),
+    userId: varchar("user_id"),
     isProcessFromFile: boolean("is_process_from_file"),
     isBulkProcess: boolean("is_bulk_process"),
     totalProcessCount: integer("total_process_count"),

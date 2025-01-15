@@ -1,0 +1,83 @@
+{
+  "id": "9be77402-301e-42fb-8b4b-945b331e271c",
+  "prevId": "be78be87-3ad0-4ad6-83ea-cfbf8bf8d265",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.process_reviews": {
+      "name": "process_reviews",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_process_from_file": {
+          "name": "is_process_from_file",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_bulk_process": {
+          "name": "is_bulk_process",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_process_count": {
+          "name": "total_process_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_input_length": {
+          "name": "total_input_length",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
