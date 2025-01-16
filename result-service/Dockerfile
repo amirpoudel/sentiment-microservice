@@ -1,11 +1,9 @@
 
 FROM node:18-slim
 
-
 WORKDIR /app
 
-
-COPY package*.json ./
+COPY package*.json .
 
 
 RUN npm install
@@ -20,8 +18,10 @@ COPY . .
 RUN tsc
 
 
+RUN npm install pm2 -g
+
 
 EXPOSE 7000
 
 
-CMD ["node", "dist/server.js"]
+CMD ["pm2-runtime", "ecosystem.config.js"]
