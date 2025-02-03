@@ -55,7 +55,7 @@ Would love to hear your thoughts! 🔥
 
 ---
 
-### 🌟 Project Image:
+### 🌟 System Design:
 
 ![System Design](https://raw.githubusercontent.com/amirpoudel/sentiment-microservice/refs/heads/main/system-design.png)
 
