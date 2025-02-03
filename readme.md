@@ -22,7 +22,7 @@ This project aims to enhance restaurant feedback analysis using AI-powered senti
 
 - **📚 API Documentation:** [Postman Docs](https://documenter.getpostman.com/view/19095537/2sAYX2MinG)
 - **🤖 Hugging Face Space:** [Model Deployment](https://huggingface.co/spaces/amirpoudel/nepali-romanized-restaurant-sentiment-analysis)
-- **🎨 Eraser Link:** [Project Design](https://app.eraser.io/workspace/nWsU3o55FkgoTxAHVlp9)
+- **🎨 System Design Link:** [System Design](https://app.eraser.io/workspace/nWsU3o55FkgoTxAHVlp9)
 
 ## 🚀 Running the Project Locally with Docker
 
