@@ -41,7 +41,7 @@ app.use('/api/v1/storage',express.static('./storage'));
 //import routes
 import { expressErrorHandler } from './lib/error/handler.error';
 
-import userRoutes from '../src/presentation/express/routes/user.route'
+import userRoutes from './presentation/express/routes/user.route'
 
 
 app.use('/api/v1/users', userRoutes);

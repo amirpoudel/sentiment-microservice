@@ -4,7 +4,7 @@ import { User } from "../../../entities/user.entity"
 
 export type IUserDocument = User & Document
 
-const userSchema = new Schema<IUserDocument>({
+const userSchema = new Schema({
     name:{
         type:String,
         required:true
@@ -35,6 +35,6 @@ userSchema.index({email:1})
 
 
 
-const UserModel = model<IUserDocument>('User',userSchema)
+const UserModel = model('User',userSchema)
 
 export {UserModel}

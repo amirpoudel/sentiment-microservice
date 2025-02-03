@@ -1,4 +1,3 @@
-
 version: '3.7'
 
 services:
@@ -14,15 +13,20 @@ services:
   kafka:
     image: confluentinc/cp-kafka
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT=192.168.1.68:2181
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.68:9092 
+      - KAFKA_ZOOKEEPER_CONNECT=172.31.6.111:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://172.31.6.111:9092
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
-  
     ports:
       - "9092:9092"
     depends_on:
-      - zookeeper  
-
+      - zookeeper
+    volumes:
+      - ./kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "127.0.0.1:9092"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
   redis:
     image: redis:latest
@@ -31,12 +35,13 @@ services:
     networks:
       - internal_network
 
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+  admin-service:
+    image: amirpoudel/sm-admin-service
+    environment:
+      - KAFKA_BROKER=172.31.6.111:9092
+    depends_on:
+      kafka:
+        condition: service_healthy
     networks:
       - internal_network
 
@@ -47,6 +52,11 @@ services:
       - INGESTION_SERVICE_URL=http://ingestion-service:5000/api/v1
       - RESULT_SERVICE_URL=http://result-service:7000/api/v1
       - USERS_SERVICE_URL=http://user-service:4000/api/v1
+    ports:
+      - "3000:3000"
+    depends_on:
+      kafka:
+        condition: service_healthy
     networks:
       - internal_network
 
@@ -56,6 +66,9 @@ services:
       - MONGODB_URI=
     ports:
       - "40001:40001"
+    depends_on:
+      kafka:
+        condition: service_healthy
     networks:
       - internal_network
 
@@ -65,6 +78,9 @@ services:
       - ACCESS_TOKEN_SECRET=
       - ACCESS_TOKEN_EXPIRES_IN=
       - GRPC_ENDPOINT=user-service:40001
+    depends_on:
+      kafka:
+        condition: service_healthy
     networks:
       - internal_network
 
@@ -72,17 +88,20 @@ services:
     image: amirpoudel/sm-ingestion-service
     environment:
       - DATABASE_URL=
-      - KAFKA_BROKER=192.168.1.68:9092
+      - KAFKA_BROKER=172.31.6.111:9092
     depends_on:
-      - kafka
-      - zookeeper
+      kafka:
+        condition: service_healthy
     networks:
       - internal_network
 
   model-service:
     image: amirpoudel/sm-model-service
     environment:
-      - KAFKA_BROKER=192.168.1.68:9092
+      - KAFKA_BROKER=172.31.6.111:9092
+    depends_on:
+      kafka:
+        condition: service_healthy
     networks:
       - internal_network
 
@@ -90,14 +109,14 @@ services:
     image: amirpoudel/sm-result-service
     environment:
       - DATABASE_URL=
-      - KAFKA_BROKER=192.168.1.68:9092
+      - KAFKA_BROKER=172.31.6.111:9092
+      - REDIS_HOST=redis
     depends_on:
-      - kafka
-      - zookeeper
+      kafka:
+        condition: service_healthy
     networks:
       - internal_network
 
 networks:
   internal_network:
     driver: bridge
-

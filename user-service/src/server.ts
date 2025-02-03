@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config({path:'./.env'});
 
 import app from './app';
-import '../src/presentation/gprc/gprc.server'
+import './presentation/grpc/grpc.server'
 
 import { connectToDatabase } from './infrastructure/config'
 

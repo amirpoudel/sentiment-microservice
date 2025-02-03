@@ -7,7 +7,7 @@ import { UserService } from "../../services/user.service";
 
 
 // Load the proto file
-const PROTO_PATH = path.join(__dirname,'./.proto')
+const PROTO_PATH = path.join(__dirname,'./user.proto')
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,
   longs: String,
